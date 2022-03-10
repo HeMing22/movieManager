@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.movieMapper">
+    <select id="queryAllMovie" resultType="pojo.Movie">
+        select * from movie;
+    </select>
+
+    <select id="queryMovieById" resultType="pojo.Movie">
+        select * from movie where id=#{id}
+    </select>
+    <insert id="addMovie" parameterType="pojo.Movie">
+        insert into
+        movemanager.movie
+        (title,moviecover_url,create_date,description,author,movie_link,type)
+        values
+        (#{title},#{moviecover_url},#{create_date},#{description},#{author},#{movie_link},#{type})
+    </insert>
+
+    <delete id="deleteMovieById" parameterType="int">
+        delete from movie where id=#{id};
+    </delete>
+
+    <update id="updateMovie" parameterType="pojo.Movie">
+        update movemanager.movie set
+        title=#{title},moviecover_url=#{moviecover_url},create_date=#{create_date},description=#{description},
+        author=#{author},movie_link=#{movie_link},type=#{type} where id=#{id}
+    </update>
+
+    <select id="queryMovieByTitle" resultType="pojo.Movie">
+        select * from movie where title like "%"#{title}"%"
+    </select>
+
+    <select id="queryMovieByAuthor" resultType="pojo.Movie">
+        select * from movie where author like "%"#{author}"%"
+    </select>
+
+    <select id="queryMovieByTime" resultType="pojo.Movie">
+        select * from where create_time=#{creat_time};
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.newsMapper">
+    <select id="queryAllNews" resultType="pojo.News">
+        select * from movemanager.news;
+    </select>
+
+    <select id="queryNewsById" resultType="pojo.News">
+        select * from news where id=#{id};
+    </select>
+    <insert id="addNews" parameterType="pojo.News">
+        insert into news(title,create_date,content,author,tag)
+        values(#{title},#{create_date},#{content},#{author},#{tag})
+    </insert>
+
+    <delete id="deleteNewsById" parameterType="int">
+        delete from news where id=#{id};
+    </delete>
+
+    <update id="updateNews" parameterType="pojo.News">
+        update news
+        set
+        title=#{title},create_date=#{create_date},content=#{content},
+        author=#{author},tag=#{tag}
+        where
+        id=#{id}
+    </update>
+
+    <select id="queryNewsByTitle" resultType="pojo.News">
+        select * from news where title like "%"#{title}"%"
+    </select>
+
+    <select id="queryNewsByAuthor" resultType="pojo.News" parameterType="java.lang.String">
+        select * from news where author like "%"#{author}"%"
+    </select>
+
+    <select id="queryNewsByTime" resultType="pojo.News" parameterType="java.util.Date">
+        select * from news where create_date=#{create_date}
+    </select>
+</mapper>
